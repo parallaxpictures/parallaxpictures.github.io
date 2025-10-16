@@ -1,9 +1,338 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Parallax</title>
-  </head>
-  <body>
-    parallax
-  </body>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Parallax Pictures — Mock</title>
+<style>
+:root{
+  --orange:#e94322;
+  --orange-deep:#dd3d1d;
+  --bg-dark:#0f0f0f;
+  --muted:#bfbfbf;
+  --card-radius:18px;
+  --max-width:1280px;
+  --badge-bright:rgba(255,255,255,0.12);
+  --badge-text:#ffffff;
+}
+
+/* FONTS */
+@font-face{font-family:"Akira Extended User";src:local("Akira Extended"),local("AkiraExtended");font-weight:700;font-style:normal;font-display:swap;}
+@font-face{font-family:"Satoshi User";src:local("Satoshi"),local("Satoshi Variable"),local("Satoshi-Regular");font-weight:300 800;font-style:normal;font-display:swap;}
+
+/* BASE */
+*{box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  margin:0;
+  background:var(--bg-dark);
+  color:#e6e6e6;
+  font-family:"Satoshi User",Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+  line-height:1.2;
+}
+
+/* HERO */
+.hero{
+  background:var(--orange);
+  min-height:72vh;
+  display:flex;
+  align-items:flex-start;
+  padding:clamp(28px,6vw,72px) clamp(18px,6vw,96px);
+}
+.hero-inner{width:100%;max-width:var(--max-width);margin-left:92px;padding-top:18px;}
+.hero-title{
+  margin:0;
+  font-family:"Akira Extended User","Impact",sans-serif;
+  font-weight:800;
+  color:#0b0b0b;
+  line-height:.86;
+  letter-spacing:-3px;
+  font-size:clamp(96px,18vw,260px);
+  text-transform:uppercase;
+}
+.hero-sub{margin:28px 0 18px;color:rgba(11,11,11,0.48);font-size:15px;max-width:640px;font-weight:400;}
+.hero-cta{display:flex;gap:16px;align-items:center;margin-top:18px;}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 22px;border-radius:28px;font-weight:700;text-decoration:none;font-size:14px;box-shadow:0 8px 18px rgba(11,11,11,0.45);transition:transform .16s,box-shadow .16s,color .14s;cursor:pointer;}
+.btn-primary{background:linear-gradient(180deg,rgba(0,0,0,0.78),rgba(0,0,0,0.88));color:#f4f4f4;border:1px solid rgba(255,255,255,0.03);padding:12px 28px;}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(11,11,11,0.6);}
+.btn-secondary{background:rgba(11,11,11,0.06);color:rgba(11,11,11,0.86);border:1px solid rgba(11,11,11,0.06);}
+.btn-secondary:hover{transform:translateY(-3px);}
+
+/* QUOTE */
+.quote{background:linear-gradient(180deg,rgba(0,0,0,0.88),rgba(0,0,0,0.96));padding:clamp(36px,6vw,64px) 0;text-align:center;}
+.quote-inner{max-width:980px;margin:0 auto;padding:26px;}
+.quote-credit{margin-bottom:18px;font-size:14px;color:rgba(255,255,255,0.4);font-weight:400;}
+.quote blockquote{margin:0;color:var(--orange);font-style:italic;font-weight:400;line-height:1.3;font-size:clamp(16px,2.6vw,26px);}
+.quote strong{color:var(--orange-deep);font-weight:700;}
+
+/* PROJECTS */
+.projects{padding:clamp(36px,6vw,84px) clamp(18px,6vw,96px);color:#e6e6e6;background:var(--bg-dark);}
+.projects-inner{max-width:var(--max-width);margin:0 auto;text-align:center;}
+.projects-title{color:var(--orange);font-family:"Satoshi User";font-weight:700;font-size:clamp(32px,3.6vw,44px);margin-bottom:32px;text-align:center;}
+.carousel-wrap{position:relative;display:flex;align-items:center;gap:12px;justify-content:center;}
+.carousel-viewport{overflow:hidden;width:100%;max-width:var(--max-width);}
+.carousel-track{display:flex;gap:30px;transition:transform .8s;padding:6px 12px;}
+.card{
+  flex:0 0 calc((100% - 2*30px)/3);
+  max-width:460px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  transition:transform .36s;
+  cursor:pointer;
+  text-decoration:none;
+  color:inherit;
+}
+.card:hover{transform:translateY(-6px);}
+.poster{
+  width:100%;
+  aspect-ratio:1/1.5;
+  border-radius:var(--card-radius);
+  background:rgba(255,255,255,0.04);
+  background-size:cover;
+  background-position:center;
+  box-shadow:0 10px 24px rgba(0,0,0,0.6);
+}
+.poster.baba-zoom{
+  background-size:101%;
+}
+.meta{margin-top:12px;display:flex;align-items:center;gap:12px;width:100%;justify-content:flex-start;}
+.badge{background:var(--badge-bright);color:var(--badge-text);font-size:10px;letter-spacing:1px;padding:3px 8px;border-radius:12px;}
+.availability{font-size:12px;color:rgba(255,255,255,0.4);}
+.availability.inprod{color:var(--orange);animation:pulse 2s infinite;text-shadow:0 0 6px rgba(233,67,34,0.4);}
+@keyframes pulse{0%,100%{opacity:1;text-shadow:0 0 6px rgba(233,67,34,0.4);}50%{opacity:0.7;text-shadow:0 0 12px rgba(233,67,34,0.8);}}
+.card-title{margin:8px 0 0;font-family:"Satoshi User",sans-serif;font-weight:700;color:#f7f7f7;font-size:18px;letter-spacing:.6px;}
+
+/* ARROWS */
+.carousel-arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:42px;
+  background:none;
+  border:none;
+  color:rgba(255,255,255,0.5);
+  cursor:pointer;
+  transition:color .2s ease,transform .2s ease,opacity .25s ease;
+  z-index:2;
+}
+.carousel-arrow:hover{color:var(--orange);transform:translateY(-50%) scale(1.15);}
+.carousel-arrow.hidden{opacity:0;pointer-events:none;transform:translateY(-50%) scale(0.9);}
+#arrow-left{left:-48px;}
+#arrow-right{right:-48px;}
+
+/* SEPARATOR */
+.section-separator{
+  width:60%;
+  height:1px;
+  background:rgba(255,255,255,0.15);
+  margin:84px auto 0;
+  border-radius:2px;
+}
+
+/* PORTFOLIOS */
+.portfolios{
+  background:var(--bg-dark);
+  padding:clamp(84px,6vw,84px) clamp(18px,6vw,96px) 220px;
+  color:#e6e6e6;
+  text-align:center;
+}
+.portfolios-inner{max-width:var(--max-width);margin:0 auto;}
+.portfolios-title{font-family:"Satoshi User";font-size:clamp(32px,3.6vw,44px);color:var(--orange);margin-bottom:32px;font-weight:700;}
+.portfolio-grid{
+  display:flex;
+  justify-content:space-around;
+  align-items:flex-start;
+  flex-wrap:wrap;
+  gap:160px;
+}
+.portfolio-card{
+  flex:0 0 calc((100% - 2*30px)/3);
+  max-width:460px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  transition:transform .36s;
+  cursor:pointer;
+  text-decoration:none;
+  color:inherit;
+}
+.portfolio-card:hover{transform:translateY(-6px);}
+.portfolio-poster{width:100%;aspect-ratio:1/1;border-radius:var(--card-radius);background:rgba(255,255,255,0.04);background-size:cover;background-position:center;box-shadow:0 10px 24px rgba(0,0,0,0.6);}
+.portfolio-title{margin:12px 0 0;font-family:"Satoshi User",sans-serif;font-weight:700;color:#f7f7f7;font-size:18px;letter-spacing:.6px;text-align:center;}
+
+/* FOOTER */
+.footer{
+  background:var(--orange);
+  color:#0b0b0b;
+  padding:48px 24px;
+  text-align:center;
+}
+.footer-inner{
+  max-width:var(--max-width);
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:20px;
+}
+.footer-logo{
+  width:120px;
+  height:40px;
+  background:rgba(0,0,0,0.1);
+  border-radius:6px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:"Satoshi User";
+  font-weight:700;
+  color:#0b0b0b;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+.footer-icons{
+  display:flex;
+  gap:18px;
+  margin-top:8px;
+}
+.footer-icons a{color:#0b0b0b;font-size:20px;text-decoration:none;transition:opacity .2s;}
+.footer-icons a:hover{opacity:0.6;}
+.footer small{font-size:12px;color:rgba(0,0,0,0.6);}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <h1 class="hero-title">PARALLAX<br>PICTURES</h1>
+    <p class="hero-sub">We are the director & cinematographer duo behind "Butterfly"</p>
+    <div class="hero-cta">
+      <button class="btn btn-primary" type="button" onclick="document.querySelector('#projects').scrollIntoView({behavior:'smooth'})">See projects</button>
+      <a class="btn btn-secondary" href="mailto:pictures.parallax2025@gmail.com">Get in touch</a>
+    </div>
+  </div>
+</header>
+
+<section class="quote">
+  <div class="quote-inner">
+    <p class="quote-credit">Sandor Sebestyén & Zsombor Nagy</p>
+    <blockquote>
+      “We yearn to make long form fictional narratives.<br>
+      To this end, we've written multiple original TV series<br>
+      and feature scripts that we would be <strong>ready to shoot tomorrow</strong>.<br>
+      We focus on full immersion in the story<br>
+      and use innovative and experimental filmmaking techniques to get there.”
+    </blockquote>
+  </div>
+</section>
+
+<main class="projects" id="projects">
+  <div class="projects-inner">
+    <h2 class="projects-title">Films and upcoming projects</h2>
+    <div class="carousel-wrap">
+      <button class="carousel-arrow" id="arrow-left" aria-label="Previous projects">‹</button>
+      <div class="carousel-viewport">
+        <div class="carousel-track" id="track">
+
+          <a class="card" href="https://youtu.be/_aFHLQ5UgRU" target="_blank" rel="noopener noreferrer">
+            <div class="poster baba-zoom" style="background-image:url('baba.png')"></div>
+            <div class="meta"><span class="badge">SHORT FILM</span><span class="availability">Available</span></div>
+            <h3 class="card-title">BABA</h3>
+          </a>
+
+          <a class="card" href="https://www.youtube.com/watch?v=VrxvIIyxhAA&t=1s" target="_blank" rel="noopener noreferrer">
+            <div class="poster" style="background-image:url('loveable.png')"></div>
+            <div class="meta"><span class="badge">SHORT FILM</span><span class="availability">Available</span></div>
+            <h3 class="card-title">Loveable</h3>
+          </a>
+
+          <article class="card"><div class="poster" style="background-image:url('butterfly.png')"></div>
+            <div class="meta"><span class="badge">SHORT FILM</span><span class="availability inprod">In production</span></div><h3 class="card-title">Butterfly</h3>
+          </article>
+          <article class="card"><div class="poster" style="background-image:url('scissors.png')"></div>
+            <div class="meta"><span class="badge">FEATURE</span><span class="availability">Coming soon</span></div><h3 class="card-title">Scissors</h3>
+          </article>
+          <article class="card"><div class="poster" style="background-image:url('ruzs.png')"></div>
+            <div class="meta"><span class="badge">FEATURE</span><span class="availability">Coming soon</span></div><h3 class="card-title">Soiled Lipstick</h3>
+          </article>
+
+        </div>
+      </div>
+      <button class="carousel-arrow" id="arrow-right" aria-label="Next projects">›</button>
+    </div>
+  </div>
+</main>
+
+<div class="section-separator"></div>
+
+<section class="portfolios">
+  <div class="portfolios-inner">
+    <h2 class="portfolios-title">Separate portfolios</h2>
+    <div class="portfolio-grid">
+      <a class="portfolio-card" href="https://sebinthebuilding.github.io" target="_blank" rel="noopener noreferrer">
+        <div class="portfolio-poster" style="background-image:url('IMG_9194.JPG')"></div>
+        <h3 class="portfolio-title">Sandor Sebestyén</h3>
+      </a>
+      <a class="portfolio-card" href="https://nagyzsombor.carrd.co" target="_blank" rel="noopener noreferrer">
+        <div class="portfolio-poster" style="background-image:url('IMG_9195.JPG')"></div>
+        <h3 class="portfolio-title">Zsombor Nagy</h3>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <img src="logo full.png" alt="Parallax Pictures Logo" style="height:40px;">
+    </div>
+    <div class="footer-icons">
+      <a href="https://instagram.com/yourhandle" aria-label="Instagram">
+        <img src="ig.jpg" alt="Instagram" style="width:24px;height:24px;">
+      </a>
+      <a href="https://facebook.com/yourpage" aria-label="Facebook">
+        <img src="fb.png" alt="Facebook" style="width:24px;height:24px;">
+      </a>
+      <a href="https://youtube.com/@yourchannel" aria-label="YouTube">
+        <img src="yt.png" alt="YouTube" style="width:24px;height:24px;">
+      </a>
+      <a href="mailto:pictures.parallax2025@gmail.com" aria-label="Email">
+        <img src="email.png" alt="Email" style="width:24px;height:24px;">
+      </a>
+    </div>
+    <small>© 2025 Parallax Pictures. All rights reserved.</small>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const track=document.getElementById('track');
+  const items=[...track.children];
+  const prev=document.getElementById('arrow-left');
+  const next=document.getElementById('arrow-right');
+  let idx=0;
+  function visibleCount(){
+    const w=window.innerWidth;
+    if(w<=620)return 1;
+    if(w<=900)return 2;
+    return 3;
+  }
+  function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+  function update(){
+    const item=items[0];if(!item)return;
+    const gap=parseFloat(getComputedStyle(track).gap)||30;
+    const itemW=item.getBoundingClientRect().width+gap;
+    const offset=idx*itemW;
+    track.style.transform=`translateX(${-offset}px)`;
+    const maxIdx=items.length-visibleCount();
+    prev.classList.toggle('hidden',idx<=0);
+    next.classList.toggle('hidden',idx>=maxIdx);
+  }
+  prev.onclick=()=>{idx=clamp(idx-visibleCount(),0,items.length-visibleCount());update();};
+  next.onclick=()=>{idx=clamp(idx+visibleCount(),0,items.length-visibleCount());update();};
+  window.addEventListener('resize',update);
+  window.addEventListener('load',update);
+})();
+</script>
+</body>
 </html>
